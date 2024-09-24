@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Multiplayer Online Game</title>
+</head>
+<body>
+    <header>
+        <h1>Multiplayer Online Game</h1>
+    </header>
+    <main>
+        <div class="lobby">
+            <h2>Game Lobby</h2>
+            <input type="text" id="username" placeholder="Enter your username" required>
+            <button id="join-button">Join Game</button>
+        </div>
+
+        <div class="game-area" id="game-area" style="display: none;">
+            <h2>Game Area</h2>
+            <div id="players-list">
+                <h3>Players:</h3>
+                <ul id="players"></ul>
+            </div>
+            <div id="game-actions">
+                <button id="action-button">Perform Action</button>
+            </div>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.lobby, .game-area {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: calc(100% - 22px);
+    margin-bottom: 10px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background: #0056b3;
+}
+let players = [];
+
+document.getElementById('join-button').addEventListener('click', function() {
+    const username = document.getElementById('username').value;
+    if (username) {
+        joinGame(username);
+    } else {
+        alert('Please enter a username.');
+    }
+});
+
+function joinGame(username) {
+    players.push(username);
+    document.getElementById('username').value = '';
+    updatePlayerList();
+    document.querySelector('.lobby').style.display = 'none';
+    document.getElementById('game-area').style.display = 'block';
+}
+
+function updatePlayerList() {
+    const playersList = document.getElementById('players');
+    playersList.innerHTML = '';
+    players.forEach(player => {
+        const li = document.createElement('li');
+        li.textContent = player;
+        playersList.appendChild(li);
+    });
+}
+
+document.getElementById('action-button').addEventListener('click', function() {
+    alert('Action performed by the player!');
+});
