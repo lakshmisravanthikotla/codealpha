@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Social Media Platform</title>
+</head>
+<body>
+    <header>
+        <h1>My Social Media</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="profile">
+            <h2>User Profile</h2>
+            <p><strong>Name:</strong> NEERAJAHANNALA</p>
+            <p><strong>Bio:</strong> HMI.DT.</p>
+        </div>
+        
+        <div class="post-form">
+            <h2>Create a Post</h2>
+            <form id="post-form">
+                <textarea id="post-content" placeholder="What's on your mind?" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+
+        <div class="posts" id="posts-container">
+            <h2>Feed</h2>
+            <!-- Posts will be dynamically inserted here -->
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.profile {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-form {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.posts {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+document.getElementById('post-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const postContent = document.getElementById('post-content').value;
+    addPost(postContent);
+    document.getElementById('post-content').value = '';
+});
+
+function addPost(content) {
+    const postsContainer = document.getElementById('posts-container');
+    const postDiv = document.createElement('div');
+    postDiv.className = 'post';
+    postDiv.innerHTML = <p>${content}</p>;
+    postsContainer.appendChild(postDiv);
+}
